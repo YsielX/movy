@@ -11,6 +11,8 @@
 
 Checkout our documentations at [here](https://docs.movy.rs)
 
+__Movy is still in very early-alpha stage and we 
+
 ## Show cases
 
 ### Trace a Transaction
@@ -84,9 +86,47 @@ public fun movy_post_increment(
 }
 ```
 
+### Call Graph and Type Graph 
+
+Generate a type graph for a move package.
+
+![type graph](./tg.svg)
+
+Generate a call graph for a move package.
+
+![call graph](./cg.svg)
+
+### Static Analysis
+
+TODO.
+
 ## Usage
 
-### Develop Tools
+### Use Movy as a Tool
+
+Install dependencies:
+
+```bash
+apt install -y libssl-dev libclang-dev
+```
+
+Build `movy` binaries.
+
+```bash
+git clone https://github.com/BitsLabSec/movy
+cd movy
+cargo build --release
+```
+
+Note a stable rust toolchain should be present.
+
+Check the usage menu.
+
+```bash
+./target/release/movy --help
+```
+
+### Use Movy as a Library
 
 Add this to your `Cargo.toml`
 
@@ -96,9 +136,9 @@ movy = {git = "https://github.com/BitsLabSec/movy", branch = "master"}
 
 Unfortunately, both `sui` and `aptos` are not on `crates.io` so we can not publish crates at this moment, unless we fully re-implement the MoveVM for both chains.
 
-### Testing Contracts
+### Write Invariants
 
-To test contracts, see [the counter sample](./test-data/counter/tests/movy.move). Note you need to add the line to your `Move.toml`. It is test dependency and will be never live on-chain.
+To write invariants for contracts, see [the counter sample](./test-data/counter/tests/movy.move). Note you need to add the line to your `Move.toml`. It is test dependency and will be never live on-chain.
 
 ```toml
 [dev-dependencies]
@@ -111,7 +151,7 @@ movy = {git = "https://github.com/BitsLabSec/movy", subdir = "move/movy", rev = 
 
 ## Roadmap
 
-At this moment, `movy` in in very early-alpha state with the folloing features missing:
+At this moment, `movy` is in very early-alpha state with the folloing features missing:
 
 - Upstream our changes to [sui](https://github.com/MystenLabs/sui) and [aptos-core](https://github.com/aptos-labs/aptos-core)
 - Full Aptos support. (We have a private branch for that but still figuring out a good API design.)
